@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}FAQ{% endblock %}
+{% block meta_description %}Frequently asked questions about working with AUXANOS GLOBAL SOLUTIONS LTD.{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container-site reveal">
+    <span class="section-label">FAQ</span>
+    <h1>Answers before the kickoff</h1>
+    <p>Common questions about how we engage, deliver, and support clients.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container-site" style="max-width: 820px;">
+    <div class="accordion accordion-aux" id="faqAccordion">
+      {% for faq in faqs %}
+      <div class="accordion-item reveal">
+        <h2 class="accordion-header" id="heading{{ forloop.counter }}">
+          <button class="accordion-button {% if not forloop.first %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.counter }}" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="collapse{{ forloop.counter }}">
+            {{ faq.question }}
+          </button>
+        </h2>
+        <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}" aria-labelledby="heading{{ forloop.counter }}" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">{{ faq.answer }}</div>
+        </div>
+      </div>
+      {% empty %}
+      <p class="section-lead">FAQs will appear here soon.</p>
+      {% endfor %}
+    </div>
+    <div class="mt-5 reveal">
+      <p class="section-lead mb-3">Still have a question?</p>
+      <a href="{% url 'website:contact' %}" class="btn-aux btn-aux-primary">Contact us</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

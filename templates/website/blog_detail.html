@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+{% block meta_description %}{{ post.excerpt }}{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container-site reveal">
+    <span class="section-label">Insight</span>
+    <h1>{{ post.title }}</h1>
+    <p>
+      {% if post.published_at %}{{ post.published_at|date:"F j, Y" }} · {% endif %}
+      {{ post.author }}
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container-site">
+    <div class="row g-5">
+      <div class="col-lg-8 reveal">
+        <div class="prose">
+          {{ post.content|linebreaks }}
+        </div>
+      </div>
+      <div class="col-lg-4 reveal">
+        <div class="contact-aside">
+          <h3>Recent insights</h3>
+          {% for item in recent_posts %}
+          <a href="{{ item.get_absolute_url }}" class="d-block mb-3" style="color: var(--muted);">
+            <strong style="color: var(--white); font-family: var(--font-display);">{{ item.title }}</strong>
+          </a>
+          {% empty %}
+          <p style="color: var(--muted); margin: 0;">More articles coming soon.</p>
+          {% endfor %}
+          <a href="{% url 'website:blog' %}" class="btn-aux btn-aux-ghost mt-2">All insights</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

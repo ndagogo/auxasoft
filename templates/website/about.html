@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}About{% endblock %}
+{% block meta_description %}Learn about AUXANOS GLOBAL SOLUTIONS LTD — our mission, values, and approach to technology delivery.{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container-site reveal">
+    <span class="section-label">About</span>
+    <h1>Building technology that compounds</h1>
+    <p>AUXANOS GLOBAL SOLUTIONS LTD is a hi-tech company focused on software, consultancy, mobile products, networking, and secure digital infrastructure.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container-site">
+    <div class="split">
+      <div class="reveal">
+        <span class="section-label">Our mission</span>
+        <h2 class="section-title">Intelligent technology, delivered with integrity</h2>
+        <p class="section-lead mb-3">We exist to help organizations adopt technology that is purposeful — not trendy. Every engagement is measured by clarity of outcomes, quality of craft, and lasting operational value.</p>
+        <p class="section-lead">Whether you need a greenfield product, a network rebuild, or a strategic IT roadmap, our teams work as an extension of yours.</p>
+      </div>
+      <div class="split-panel reveal" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top: 0;">
+  <div class="container-site">
+    <div class="reveal">
+      <span class="section-label">How we work</span>
+      <h2 class="section-title">A disciplined delivery model</h2>
+    </div>
+    <div class="service-grid mt-4">
+      <article class="service-item reveal">
+        <div class="service-icon"><i class="bi bi-search"></i></div>
+        <h3>Discover</h3>
+        <p>We map goals, constraints, and stakeholders before a single line of code or cable is planned.</p>
+      </article>
+      <article class="service-item reveal">
+        <div class="service-icon"><i class="bi bi-diagram-3"></i></div>
+        <h3>Design</h3>
+        <p>Architecture, UX, and infrastructure decisions are made with longevity and maintainability in mind.</p>
+      </article>
+      <article class="service-item reveal">
+        <div class="service-icon"><i class="bi bi-rocket-takeoff"></i></div>
+        <h3>Deliver</h3>
+        <p>Incremental releases, transparent communication, and rigorous quality keep projects on course.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+{% if team %}
+<section class="section quote-band">
+  <div class="container-site">
+    <div class="reveal">
+      <span class="section-label">Leadership</span>
+      <h2 class="section-title">People behind the practice</h2>
+      <p class="section-lead">Experienced practitioners across engineering, consultancy, and infrastructure.</p>
+    </div>
+    <div class="team-grid">
+      {% for member in team %}
+      <article class="team-member reveal">
+        <div class="team-avatar">{{ member.name.0 }}</div>
+        <h3>{{ member.name }}</h3>
+        <div class="role">{{ member.role }}</div>
+        <p>{{ member.bio }}</p>
+      </article>
+      {% endfor %}
+    </div>
+    <div class="mt-4 reveal">
+      <a href="{% url 'website:team' %}" class="btn-aux btn-aux-ghost">Meet the full team</a>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="cta-band">
+  <div class="container-site reveal">
+    <h2>Let’s build with purpose</h2>
+    <p>Partner with AUXANOS for technology that scales with your ambition.</p>
+    <a href="{% url 'website:contact' %}" class="btn-aux btn-aux-primary">Contact us</a>
+  </div>
+</section>
+{% endblock %}

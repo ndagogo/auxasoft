@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}Contact{% endblock %}
+{% block meta_description %}Contact AUXANOS GLOBAL SOLUTIONS LTD for software, IT consultancy, mobile, networking, and hi-tech projects.{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container-site reveal">
+    <span class="section-label">Contact</span>
+    <h1>Let’s discuss your next move</h1>
+    <p>Share a brief on your project or challenge. We’ll respond with thoughtful next steps.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container-site">
+    <div class="contact-shell">
+      <aside class="contact-aside reveal">
+        <h3>Reach AUXANOS</h3>
+        <div class="contact-line">
+          <i class="bi bi-envelope"></i>
+          <div>
+            <strong>Email</strong>
+            <a href="mailto:{{ company.email }}">{{ company.email }}</a>
+          </div>
+        </div>
+        <div class="contact-line">
+          <i class="bi bi-telephone"></i>
+          <div>
+            <strong>Phone</strong>
+            <a href="tel:{{ company.phone|cut:' ' }}">{{ company.phone }}</a>
+          </div>
+        </div>
+        <div class="contact-line">
+          <i class="bi bi-geo-alt"></i>
+          <div>
+            <strong>Location</strong>
+            {{ company.address }}
+          </div>
+        </div>
+        <div class="contact-line">
+          <i class="bi bi-clock"></i>
+          <div>
+            <strong>Hours</strong>
+            {{ company.hours }}
+          </div>
+        </div>
+      </aside>
+
+      <div class="reveal">
+        <form method="post" novalidate>
+          {% csrf_token %}
+          {% if form.non_field_errors %}
+          <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+          {% endif %}
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label" for="{{ form.name.id_for_label }}">Name</label>
+              {{ form.name }}
+              {% if form.name.errors %}<div class="text-danger small mt-1">{{ form.name.errors|striptags }}</div>{% endif %}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="{{ form.email.id_for_label }}">Email</label>
+              {{ form.email }}
+              {% if form.email.errors %}<div class="text-danger small mt-1">{{ form.email.errors|striptags }}</div>{% endif %}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="{{ form.phone.id_for_label }}">Phone</label>
+              {{ form.phone }}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="{{ form.company.id_for_label }}">Company</label>
+              {{ form.company }}
+            </div>
+            <div class="col-12">
+              <label class="form-label" for="{{ form.service_interest.id_for_label }}">Service interest</label>
+              {{ form.service_interest }}
+            </div>
+            <div class="col-12">
+              <label class="form-label" for="{{ form.subject.id_for_label }}">Subject</label>
+              {{ form.subject }}
+              {% if form.subject.errors %}<div class="text-danger small mt-1">{{ form.subject.errors|striptags }}</div>{% endif %}
+            </div>
+            <div class="col-12">
+              <label class="form-label" for="{{ form.message.id_for_label }}">Message</label>
+              {{ form.message }}
+              {% if form.message.errors %}<div class="text-danger small mt-1">{{ form.message.errors|striptags }}</div>{% endif %}
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn-aux btn-aux-primary">Send message</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

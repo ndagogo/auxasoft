@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Services{% endblock %}
+{% block meta_description %}Explore AUXANOS services: software development, IT consultancy, mobile apps, networking, cloud, and cybersecurity.{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container-site reveal">
+    <span class="section-label">Services</span>
+    <h1>End-to-end technology capabilities</h1>
+    <p>Software, consultancy, mobile, networking, cloud, and hi-tech security — unified under one accountable partner.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container-site">
+    <div class="service-grid" style="margin-top: 0;">
+      {% for service in services %}
+      <article class="service-item reveal">
+        <div class="service-icon"><i class="bi {{ service.icon }}"></i></div>
+        <h3>{{ service.title }}</h3>
+        <p>{{ service.short_description }}</p>
+        <a class="link-more" href="{{ service.get_absolute_url }}">View details <i class="bi bi-arrow-right"></i></a>
+      </article>
+      {% empty %}
+      <p class="section-lead">Services will appear here once published in the admin.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

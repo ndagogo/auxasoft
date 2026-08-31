@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}{{ job.title }}{% endblock %}
+{% block meta_description %}{{ job.summary }}{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container-site reveal">
+    <span class="section-label">{{ job.department }} · {{ job.get_employment_type_display }}</span>
+    <h1>{{ job.title }}</h1>
+    <p>{{ job.location }} — {{ job.summary }}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container-site">
+    <div class="row g-5">
+      <div class="col-lg-8 reveal">
+        <div class="prose">
+          <h2>About the role</h2>
+          <p>{{ job.description|linebreaksbr }}</p>
+          {% if job.requirement_list %}
+          <h2>Requirements</h2>
+          <ul class="feature-list">
+            {% for req in job.requirement_list %}
+            <li>{{ req }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-lg-4 reveal">
+        <div class="contact-aside">
+          <h3>Apply</h3>
+          <p style="color: var(--muted);">Send your CV and a short note to our team.</p>
+          <a href="mailto:{{ company.email }}?subject=Application:%20{{ job.title|urlencode }}" class="btn-aux btn-aux-primary">Email application</a>
+          <a href="{% url 'website:careers' %}" class="btn-aux btn-aux-ghost mt-2 d-inline-flex">All openings</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-visual" aria-hidden="true">
+    <div class="hero-metric-rail">
+      <strong>Hi-Tech</strong>
+      Delivery Partner
+    </div>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-copy reveal">
+      <h1 class="hero-brand">
+        <span>Global Solutions Ltd</span>
+        AUXANOS
+      </h1>
+      <p class="hero-lead">{{ company.tagline }}. We design, build, and secure the digital systems that move modern businesses forward.</p>
+      <div class="hero-actions">
+        <a href="{% url 'website:contact' %}" class="btn-aux btn-aux-primary">Start a Project</a>
+        <a href="{% url 'website:services' %}" class="btn-aux btn-aux-ghost">Explore Services</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container-site">
+    <div class="reveal">
+      <span class="section-label">What we do</span>
+      <h2 class="section-title">Capabilities built for ambitious organizations</h2>
+      <p class="section-lead">From software platforms to secure networks, AUXANOS delivers end-to-end technology with clarity and craft.</p>
+    </div>
+    <div class="service-grid">
+      {% for service in services %}
+      <article class="service-item reveal">
+        <div class="service-icon"><i class="bi {{ service.icon }}"></i></div>
+        <h3>{{ service.title }}</h3>
+        <p>{{ service.short_description }}</p>
+        <a class="link-more" href="{{ service.get_absolute_url }}">Learn more <i class="bi bi-arrow-right"></i></a>
+      </article>
+      {% empty %}
+      <article class="service-item">
+        <h3>Services coming soon</h3>
+        <p>Our capabilities are being published. Please contact us for a direct briefing.</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top: 0;">
+  <div class="container-site">
+    <div class="split">
+      <div class="split-panel reveal" aria-hidden="true"></div>
+      <div class="reveal">
+        <span class="section-label">About AUXANOS</span>
+        <h2 class="section-title">A technology partner with boardroom clarity</h2>
+        <p class="section-lead">AUXANOS GLOBAL SOLUTIONS LTD helps organizations modernize through software engineering, consultancy, mobile products, networking, and hi-tech services — delivered with discipline and long-term thinking.</p>
+        <div class="stat-row">
+          <div><strong>6+</strong><span>Core practice areas</span></div>
+          <div><strong>100%</strong><span>Client-focused delivery</span></div>
+          <div><strong>24/7</strong><span>Support mindset</span></div>
+        </div>
+        <div class="mt-4">
+          <a href="{% url 'website:about' %}" class="btn-aux btn-aux-ghost">Our Story</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if projects %}
+<section class="section">
+  <div class="container-site">
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 reveal">
+      <div>
+        <span class="section-label">Selected work</span>
+        <h2 class="section-title">Projects that prove the craft</h2>
+      </div>
+      <a href="{% url 'website:projects' %}" class="btn-aux btn-aux-ghost">View all projects</a>
+    </div>
+    <div class="project-rail">
+      {% for project in projects %}
+      <a href="{{ project.get_absolute_url }}" class="project-tile reveal">
+        <div class="project-media">
+          <span>{{ project.get_category_display }}</span>
+        </div>
+        <div class="project-body">
+          <h3>{{ project.title }}</h3>
+          <p>{{ project.summary }}</p>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if testimonials %}
+<section class="section quote-band">
+  <div class="container-site">
+    <div class="reveal">
+      <span class="section-label">Client voices</span>
+      <h2 class="section-title">Trusted by leaders who ship</h2>
+    </div>
+    <div class="quote-grid">
+      {% for t in testimonials %}
+      <blockquote class="quote-item reveal">
+        <p>“{{ t.quote }}”</p>
+        <div class="quote-meta">
+          <strong>{{ t.client_name }}</strong>
+          {{ t.client_role }}{% if t.company %}, {{ t.company }}{% endif %}
+        </div>
+      </blockquote>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if posts %}
+<section class="section">
+  <div class="container-site">
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 reveal">
+      <div>
+        <span class="section-label">Insights</span>
+        <h2 class="section-title">Ideas from the delivery floor</h2>
+      </div>
+      <a href="{% url 'website:blog' %}" class="btn-aux btn-aux-ghost">All articles</a>
+    </div>
+    <div class="blog-grid">
+      {% for post in posts %}
+      <a href="{{ post.get_absolute_url }}" class="blog-tile reveal">
+        {% if post.published_at %}<time datetime="{{ post.published_at|date:'c' }}">{{ post.published_at|date:"M d, Y" }}</time>{% endif %}
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.excerpt }}</p>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="cta-band">
+  <div class="container-site reveal">
+    <span class="section-label">Engage</span>
+    <h2>Ready to build what’s next?</h2>
+    <p>Tell us about your software, infrastructure, or digital transformation goals. We’ll respond with a clear path forward.</p>
+    <a href="{% url 'website:contact' %}" class="btn-aux btn-aux-primary">Talk to AUXANOS</a>
+  </div>
+</section>
+{% endblock %}

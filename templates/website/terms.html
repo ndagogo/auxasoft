@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Terms of Use{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container-site reveal">
+    <span class="section-label">Legal</span>
+    <h1>Terms of Use</h1>
+    <p>Terms governing use of the AUXANOS GLOBAL SOLUTIONS LTD website.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container-site">
+    <div class="prose reveal">
+      <p>Last updated: {% now "F j, Y" %}</p>
+      <p>By accessing this website, you agree to these Terms of Use. If you do not agree, please discontinue use of the site.</p>
+      <h2>Website content</h2>
+      <p>Content is provided for general information about AUXANOS GLOBAL SOLUTIONS LTD and our services. We strive for accuracy but do not warrant that all materials are complete or current.</p>
+      <h2>Intellectual property</h2>
+      <p>All trademarks, logos, text, graphics, and design elements on this site are owned by AUXANOS or used with permission. You may not copy or redistribute them without prior written consent.</p>
+      <h2>Inquiries and proposals</h2>
+      <p>Submitting a contact form does not create a contractual engagement. Formal work begins only under a signed agreement between parties.</p>
+      <h2>Limitation of liability</h2>
+      <p>To the fullest extent permitted by law, AUXANOS is not liable for any indirect or consequential damages arising from use of this website.</p>
+      <h2>Changes</h2>
+      <p>We may update these terms periodically. Continued use of the site after changes constitutes acceptance of the revised terms.</p>
+      <h2>Contact</h2>
+      <p>Questions about these terms: <a href="mailto:{{ company.email }}">{{ company.email }}</a>.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}{{ service.title }}{% endblock %}
+{% block meta_description %}{{ service.short_description }}{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container-site reveal">
+    <span class="section-label">Service</span>
+    <h1>{{ service.title }}</h1>
+    <p>{{ service.short_description }}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container-site">
+    <div class="row g-5">
+      <div class="col-lg-7 reveal">
+        <div class="service-icon mb-4"><i class="bi {{ service.icon }}"></i></div>
+        <div class="prose">
+          <p>{{ service.description|linebreaksbr }}</p>
+        </div>
+        {% if service.feature_list %}
+        <h3 class="mt-4 mb-0" style="font-size: 1.2rem;">What’s included</h3>
+        <ul class="feature-list">
+          {% for feature in service.feature_list %}
+          <li>{{ feature }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        <div class="mt-4">
+          <a href="{% url 'website:contact' %}" class="btn-aux btn-aux-primary">Request this service</a>
+        </div>
+      </div>
+      <div class="col-lg-5 reveal">
+        <div class="contact-aside">
+          <h3>Related services</h3>
+          {% for item in related_services %}
+          <a href="{{ item.get_absolute_url }}" class="d-block mb-3" style="color: var(--muted);">
+            <strong style="color: var(--white); font-family: var(--font-display);">{{ item.title }}</strong><br>
+            {{ item.short_description|truncatechars:90 }}
+          </a>
+          {% empty %}
+          <p style="color: var(--muted); margin: 0;">Explore our full <a href="{% url 'website:services' %}">services catalogue</a>.</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

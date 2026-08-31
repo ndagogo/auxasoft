@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Careers{% endblock %}
+{% block meta_description %}Join AUXANOS GLOBAL SOLUTIONS LTD — open roles in engineering, consultancy, and technology delivery.{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container-site reveal">
+    <span class="section-label">Careers</span>
+    <h1>Build with a team that cares about craft</h1>
+    <p>We’re growing carefully — looking for people who value clarity, ownership, and excellent delivery.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container-site">
+    {% for job in jobs %}
+    <div class="job-row reveal">
+      <div>
+        <h3><a href="{{ job.get_absolute_url }}" style="color: var(--white);">{{ job.title }}</a></h3>
+        <div class="meta">{{ job.summary }}</div>
+      </div>
+      <div class="meta">{{ job.department }}</div>
+      <div class="meta">{{ job.location }} · {{ job.get_employment_type_display }}</div>
+      <div>
+        <a href="{{ job.get_absolute_url }}" class="btn-aux btn-aux-ghost btn-aux-nav">View role</a>
+      </div>
+    </div>
+    {% empty %}
+    <p class="section-lead reveal">No open roles at the moment. Send your profile to <a href="mailto:{{ company.email }}">{{ company.email }}</a> for future opportunities.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

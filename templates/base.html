@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ company.short_name }}{% endblock %} | {{ company.name }}</title>
+  <meta name="description" content="{% block meta_description %}{{ company.tagline }} — Software development, IT consultancy, mobile apps, networking and hi-tech solutions.{% endblock %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+  <div class="site-bg" aria-hidden="true"></div>
+  <div class="site-grid" aria-hidden="true"></div>
+
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-auxanos">
+    <div class="container-site d-flex align-items-center w-100">
+      <a class="brand-mark" href="{% url 'website:home' %}">
+        <span class="brand-glyph">AG</span>
+        <span>{{ company.short_name }}</span>
+      </a>
+      <button class="navbar-toggler border-0 ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+          <li class="nav-item"><a class="nav-link nav-link-aux {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'website:home' %}">Home</a></li>
+          <li class="nav-item"><a class="nav-link nav-link-aux {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'website:about' %}">About</a></li>
+          <li class="nav-item"><a class="nav-link nav-link-aux {% if 'service' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'website:services' %}">Services</a></li>
+          <li class="nav-item"><a class="nav-link nav-link-aux {% if 'project' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'website:projects' %}">Projects</a></li>
+          <li class="nav-item"><a class="nav-link nav-link-aux {% if request.resolver_match.url_name == 'team' %}active{% endif %}" href="{% url 'website:team' %}">Team</a></li>
+          <li class="nav-item"><a class="nav-link nav-link-aux {% if 'blog' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'website:blog' %}">Insights</a></li>
+          <li class="nav-item"><a class="nav-link nav-link-aux {% if 'career' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'website:careers' %}">Careers</a></li>
+          <li class="nav-item ms-lg-2">
+            <a class="btn-aux btn-aux-primary btn-aux-nav" href="{% url 'website:contact' %}">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  {% if messages %}
+  <div class="container-site mt-3">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer-aux">
+    <div class="container-site">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="footer-brand">{{ company.short_name }}</div>
+          <p>{{ company.tagline }}. Software development, IT consultancy, mobile applications, networking, and hi-tech solutions.</p>
+          <form action="{% url 'website:newsletter' %}" method="post" class="newsletter-row">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ request.path }}">
+            <input type="email" name="email" class="form-control" placeholder="Subscribe for insights" required>
+            <button type="submit" class="btn-aux btn-aux-primary">Join</button>
+          </form>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2 footer-col">
+          <h4>Company</h4>
+          <a href="{% url 'website:about' %}">About</a>
+          <a href="{% url 'website:team' %}">Team</a>
+          <a href="{% url 'website:careers' %}">Careers</a>
+          <a href="{% url 'website:faq' %}">FAQ</a>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2 footer-col">
+          <h4>Solutions</h4>
+          <a href="{% url 'website:services' %}">Services</a>
+          <a href="{% url 'website:projects' %}">Projects</a>
+          <a href="{% url 'website:blog' %}">Insights</a>
+          <a href="{% url 'website:contact' %}">Engage Us</a>
+        </div>
+        <div class="col-md-6 col-lg-4 footer-col">
+          <h4>Contact</h4>
+          <a href="mailto:{{ company.email }}">{{ company.email }}</a>
+          <a href="tel:{{ company.phone|cut:' ' }}">{{ company.phone }}</a>
+          <span class="d-block text-secondary mt-2" style="color: var(--muted) !important;">{{ company.address }}</span>
+          <span class="d-block" style="color: var(--muted);">{{ company.hours }}</span>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; {% now "Y" %} {{ company.name }}. All rights reserved.</span>
+        <span>
+          <a href="{% url 'website:privacy' %}">Privacy</a>
+          &nbsp;·&nbsp;
+          <a href="{% url 'website:terms' %}">Terms</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>
