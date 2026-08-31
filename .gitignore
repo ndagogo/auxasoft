@@ -1,10 +1,8 @@
 # Python
 __pycache__/
 *.py[cod]
-*$py.class
-*.so
 
-# Virtual environment
+# Virtual environments
 venv/
 .venv/
 env/
@@ -14,17 +12,16 @@ ENV/
 *.log
 db.sqlite3
 db.sqlite3-journal
+staticfiles/
 
 # Environment variables
 .env
 .env.*
-!.env.example
 
-# Static/media
-staticfiles/
+# Media
 media/
 
-# IDEs
+# IDE
 .vscode/
 .idea/
 .cursor/
@@ -32,30 +29,3 @@ media/
 # OS
 .DS_Store
 Thumbs.db
-
-# Pytest
-.pytest_cache/
-
-# Coverage
-.coverage
-htmlcov/
-
-# Django local files
-*.sqlite3
-
-# Secrets / certificates
-*.pem
-*.key
-*.crt
-
-# Node
-node_modules/
-
-# Build
-build/
-dist/
-*.egg-info/
-
-# Temporary
-*.tmp
-*.temp
