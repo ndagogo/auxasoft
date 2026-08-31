@@ -234,8 +234,8 @@ COMPANY = {
     "name": "AUXANOS GLOBAL SOLUTIONS LTD",
     "short_name": "AUXANOS",
     "tagline": "Engineering Intelligent Technology for a Connected World",
-    "email": "info@auxanosglobalsolutions.com",
-    "phone": "+234 800 000 0000",
+    "email": "myinfo@auxanosglobalsolutions.com",
+    "phone": "+234 8064912304",
     "address": "Lagos, Nigeria",
     "hours": "Mon – Fri, 9:00 AM – 6:00 PM WAT",
 }
